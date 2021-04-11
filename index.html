@@ -8,11 +8,15 @@
 </head>
 <body>
     <h1>Todos</h1>
-    <input id="search-text" type="text" placeholder="Enter Todo">
-    <button id="add-todo">Add Todo</button>
-    <div id="todos">
-
-    </div>
+    <input id="search-text" type="text" placeholder="Filter Todos">
+    <label>
+        <input type="checkbox" id="hide-completed"> Hide Completed
+    </label>
+    <div id="todos"></div>
+    <form id="new-todo">
+        <input type="text" placeholder="something todo" name="text">
+        <button>Add Todo</button>
+    </form>
     <script src="script.js"></script>
 </body>
 </html>

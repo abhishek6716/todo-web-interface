@@ -1,33 +1,33 @@
 console.log("Welcome to todo app!")
 
-const todos = [{
-    text: 'Order cat food',
-    completed: false
-},{
-    text: 'Clean kitchen',
-    completed: true
-}, {
-    text: 'Buy food',
-    completed: true
-}, {
-    text: 'Do work',
-    completed: false
-}, {
-    text: 'Exercise',
-    completed: true
-}]
+let todos = []
 
-const incompleteTodos = todos.filter(function(todo){
+const filters = {
+    searchText: '',
+    hideCompleted: false
+}
+
+const todosJSON = localStorage.getItem('todos')
+
+if (todosJSON !== null) {
+    todos = JSON.parse(todosJSON)
+}
+
+const incompleteTodos = todos.filter(function (todo) {
     return !todo.completed
 })
 
-const filters = {
-    searchText: ''
-}
-
-const renderTodos = function(todos, filters){
-    const filteredTodos = todos.filter(function(todo){
+const renderTodos = function (todos, filters) {
+    let filteredTodos = todos.filter(function (todo) {
         return todo.text.toLowerCase().includes(filters.searchText.toLowerCase())
+    })
+
+    filteredTodos = filteredTodos.filter(function (todo) {
+        if (filters.hideCompleted) {
+            return !todo.completed
+        } else {
+            return true
+        }
     })
 
     const incompleteTodos = filteredTodos.filter(function (todo) {
@@ -40,7 +40,7 @@ const renderTodos = function(todos, filters){
     summary.textContent = `You have ${incompleteTodos.length} todos left`
     document.querySelector('#todos').appendChild(summary)
 
-    filteredTodos.forEach(function(todo){
+    filteredTodos.forEach(function (todo) {
         const todoEl = document.createElement('p')
         todoEl.textContent = todo.text
         document.querySelector('#todos').appendChild(todoEl)
@@ -49,11 +49,26 @@ const renderTodos = function(todos, filters){
 
 renderTodos(todos, filters)
 
-document.querySelector('#search-text').addEventListener('input', function(e){
+document.querySelector('#search-text').addEventListener('input', function (e) {
     filters.searchText = e.target.value
     renderTodos(todos, filters)
 })
 
+document.querySelector('#new-todo').addEventListener('submit', function (e) {
+    e.preventDefault()
+    todos.push({
+        text: e.target.elements.text.value,
+        completed: false
+    })
+    localStorage.setItem('todos', JSON.stringify(todos))
+    renderTodos(todos, filters)
+    e.target.elements.text.value = ''
+})
+
+document.querySelector('#hide-completed').addEventListener('change', function (e) {
+    filters.hideCompleted = e.target.checked
+    renderTodos(todos, filters)
+})
 
 
 // todos.forEach(function(item){
