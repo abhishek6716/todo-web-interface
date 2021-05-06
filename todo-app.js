@@ -1,3 +1,5 @@
+'use strict'
+
 console.log("Welcome to todo app!")
 
 let todos = getSavedTodos()
