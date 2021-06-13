@@ -5,20 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo-App</title>
+    <link href="./styles/style.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Todos</h1>
-    <input id="search-text" type="text" placeholder="Filter Todos">
-    <label>
-        <input type="checkbox" id="hide-completed"> Hide Completed
-    </label>
-    <div id="todos"></div>
-    <form id="new-todo">
-        <input type="text" placeholder="something todo" name="text">
-        <button>Add Todo</button>
-    </form>
-    <script src="uuid.js"></script>
-    <script src="todo-fxn.js"></script>
-    <script src="todo-app.js"></script>
+    <div class="header">
+        <div class="container">
+            <h1 class="header__title">ToDo App</h1>
+            <h2 class="header__subtitle">What do you need to do?</h2>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="actions__container">
+            <input id="search-text" class="input" type="text" placeholder="Filter Todos">
+            <label class="checkbox">
+                <input type="checkbox" id="hide-completed"> Hide Completed
+            </label>
+        </div>
+    </div>
+    <div class="container">
+        <div id="todos"></div>
+        <form id="new-todo">
+            <input class="input" type="text" placeholder="something todo" name="text">
+            <button class="button">Add Todo</button>
+        </form>
+    </div>
+    
+    <script src="./scripts/uuid.js"></script>
+    <script src="./scripts/todo-fxn.js"></script>
+    <script src="./scripts/todo-app.js"></script>
 </body>
 </html>
